@@ -2,8 +2,9 @@ import bcrypt from "bcryptjs";
 import mongoose,{ Schema } from "mongoose";
 
 
-interface VideoSchema{
+export interface VideoSchema{
     _id?: mongoose.Types.ObjectId;
+    userId: mongoose.Types.ObjectId;
     title: string;
     description: string;
     videoUrl: string;
@@ -24,6 +25,7 @@ export const VIDEO_DIMENSIONS = {
 } as const;
 
 const videoSchema = new Schema<VideoSchema>({
+    userId: { type:mongoose.Types.ObjectId, ref:"user", required:true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     videoUrl: { type: String, required: true },
